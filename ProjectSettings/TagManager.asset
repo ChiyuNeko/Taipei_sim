@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - hug-IceBall
+  - Citizens
+  - brokenBuild
   layers:
   - Default
   - TransparentFX
@@ -13,16 +16,16 @@ TagManager:
   - UI
   - 
   - 
+  - FrozenChunks
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - OnAccidentPosition
+  - CitizensTargetPosition
+  - NavMashBake
+  - NV-Mash_brokenBuild
+  - NV-Mash_Build
+  - NV-Mash_Sidewalk
+  - NV-Mash_Road
+  - NV-Mash_ZebraCrossing
   - 
   - 
   - 
