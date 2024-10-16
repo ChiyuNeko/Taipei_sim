@@ -6,10 +6,11 @@ public class CameraCitizenTracker : MonoBehaviour
     public Transform nowTrackingNPC;
 
     public List<Transform> citizens = new List<Transform>();
-    public Transform cameraTarget;  // ¬Û¾÷
-    public float updateInterval = 1f;  // §ó·sÀW²v¡]¬í¡^
+    public Transform cameraTarget;  // ï¿½Û¾ï¿½
+    public float updateInterval = 1f;  // ï¿½ï¿½sï¿½Wï¿½vï¿½]ï¿½ï¿½ï¿½^
+    public Vector3 offset;
     private float timer = 0f;
-    private int currentCitizenIndex = 0;  // ·í«e°lÂÜªºNPC¯Á¤Þ
+    private int currentCitizenIndex = 0;  // ï¿½ï¿½ï¿½eï¿½lï¿½Üªï¿½NPCï¿½ï¿½ï¿½ï¿½
 
 
 
@@ -27,19 +28,19 @@ public class CameraCitizenTracker : MonoBehaviour
             timer = 0f;
         }
 
-        // ¤Á´«¤U¤@­Ó©Î¤W¤@­ÓNPC
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½@ï¿½Ó©Î¤Wï¿½@ï¿½ï¿½NPC
         if (citizens.Count > 0)
         {
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                currentCitizenIndex = (currentCitizenIndex + 1) % citizens.Count;  // ´`Àô¨ì¤U¤@­ÓNPC
+                currentCitizenIndex = (currentCitizenIndex + 1) % citizens.Count;  // ï¿½`ï¿½ï¿½ï¿½ï¿½Uï¿½@ï¿½ï¿½NPC
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                currentCitizenIndex = (currentCitizenIndex - 1 + citizens.Count) % citizens.Count;  // ´`Àô¨ì¤W¤@­ÓNPC
+                currentCitizenIndex = (currentCitizenIndex - 1 + citizens.Count) % citizens.Count;  // ï¿½`ï¿½ï¿½ï¿½ï¿½Wï¿½@ï¿½ï¿½NPC
             }
 
-            // ½T«O¬Û¾÷¥Ø¼Ð®É®É§ó·s¬°·í«e°lÂÜªºNPC¦ì¸m
+            // ï¿½Tï¿½Oï¿½Û¾ï¿½ï¿½Ø¼Ð®É®É§ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½eï¿½lï¿½Üªï¿½NPCï¿½ï¿½m
             UpdateCameraTarget();
         }
     }
@@ -53,7 +54,7 @@ public class CameraCitizenTracker : MonoBehaviour
             citizens.Add(citizen.transform);
         }
 
-        // ¦pªG¥Ø«e¯Á¤Þ¶W¥X½d³ò¡A­«¸m¯Á¤Þ
+        // ï¿½pï¿½Gï¿½Ø«eï¿½ï¿½ï¿½Þ¶Wï¿½Xï¿½dï¿½ï¿½Aï¿½ï¿½ï¿½mï¿½ï¿½ï¿½ï¿½
         if (currentCitizenIndex >= citizens.Count)
         {
             currentCitizenIndex = 0;
@@ -64,8 +65,8 @@ public class CameraCitizenTracker : MonoBehaviour
     {
         if (citizens.Count > 0)
         {
-            // Åý cameraTarget ªº¦ì¸m®É®É§ó·s¬°·í«eªº NPC ¦ì¸m
-            cameraTarget.position = citizens[currentCitizenIndex].position;
+            // ï¿½ï¿½ cameraTarget ï¿½ï¿½ï¿½ï¿½mï¿½É®É§ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½ NPC ï¿½ï¿½m
+            cameraTarget.position = citizens[currentCitizenIndex].position + offset;
             nowTrackingNPC = citizens[currentCitizenIndex];
         }
     }

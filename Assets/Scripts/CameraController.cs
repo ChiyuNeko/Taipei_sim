@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform target;  // °lÂÜªº¥Ø¼Ð¡]³q±`¬O NPC¡^
-    public float distance = 10.0f;  // »P¥Ø¼Ðªºªì©l¶ZÂ÷
-    public float zoomSpeed = 2.0f;  // ÁY©ñ³t«×
-    public float minDistance = 2.0f;  // ³Ì¤p¶ZÂ÷
-    public float maxDistance = 20.0f; // ³Ì¤j¶ZÂ÷
-    public float rotationSpeed = 5.0f;  // ·Æ¹«±ÛÂà³t«×
+    public Transform target;  // ï¿½lï¿½Üªï¿½ï¿½Ø¼Ð¡]ï¿½qï¿½`ï¿½O NPCï¿½^
+    public float distance = 10.0f;  // ï¿½Pï¿½Ø¼Ðªï¿½ï¿½ï¿½lï¿½Zï¿½ï¿½
+    public float zoomSpeed = 2.0f;  // ï¿½Yï¿½ï¿½tï¿½ï¿½
+    public float minDistance = 2.0f;  // ï¿½Ì¤pï¿½Zï¿½ï¿½
+    public float maxDistance = 20.0f; // ï¿½Ì¤jï¿½Zï¿½ï¿½
+    public float rotationSpeed = 5.0f;  // ï¿½Æ¹ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½
+    public Vector3 offset;
 
     CameraCitizenTracker cameraCitizenTracker;
 
@@ -21,15 +22,15 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        // ·Æ¹«¥kÁä±ÛÂà
+        // ï¿½Æ¹ï¿½ï¿½kï¿½ï¿½ï¿½ï¿½ï¿½
         if (Input.GetMouseButton(1))
         {
             currentX += Input.GetAxis("Mouse X") * rotationSpeed;
             currentY -= Input.GetAxis("Mouse Y") * rotationSpeed;
-            currentY = Mathf.Clamp(currentY, -90, 90);  // ­­¨îY¶b±ÛÂà¨¤«×
+            currentY = Mathf.Clamp(currentY, -90, 90);  // ï¿½ï¿½ï¿½ï¿½Yï¿½bï¿½ï¿½ï¿½à¨¤ï¿½ï¿½
         }
 
-        // ·Æ¹«ºu½üÁY©ñ
+        // ï¿½Æ¹ï¿½ï¿½uï¿½ï¿½ï¿½Yï¿½ï¿½
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         distance -= scroll * zoomSpeed;
         distance = Mathf.Clamp(distance, minDistance, maxDistance);
@@ -41,12 +42,12 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        // ­pºâ¬Û¾÷¦ì¸m
+        // ï¿½pï¿½ï¿½Û¾ï¿½ï¿½ï¿½m
         if (target != null)
         {
             Vector3 direction = new Vector3(0, 0, -distance);
             Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-            transform.position = target.position + rotation * direction;
+            transform.position = target.position + rotation * direction + offset;
             transform.LookAt(target.position);
         }
     }
