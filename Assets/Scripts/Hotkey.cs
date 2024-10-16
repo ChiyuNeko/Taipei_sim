@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Hotkey : MonoBehaviour
@@ -9,12 +10,31 @@ public class Hotkey : MonoBehaviour
     public Vector3 GenerateOffset;
     public Vector3 Force;
 
+
+    public KeyCode Generate;
+    public KeyCode MoveCamera;
+    public KeyCode MoveCameraBack;
     
+
+
+    void Start()
+    {
+    }
     void Update()
     {
-        if(Input.GetKey(KeyCode.F))
+        if(Input.GetKey(Generate))
         {
             DynamicGenerate(GenerateObjectArray[0], GenerateArea, GenerateOffset, Force);
+        }
+
+        if(Input.GetKey(MoveCamera))
+        {
+            gameObject.GetComponent<DollyCameraControl>().MoveCamera();
+        }
+
+        if(Input.GetKey(MoveCameraBack))
+        {
+            gameObject.GetComponent<DollyCameraControl>().CameraBack();
         }
     }
     
