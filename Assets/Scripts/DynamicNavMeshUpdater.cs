@@ -20,7 +20,7 @@ public class DynamicNavMeshUpdater : MonoBehaviour
 
         if (navMeshSurface != null)
         {
-            //StartCoroutine(UpdateNavMesh());
+            StartCoroutine(UpdateNavMesh());
         }
     }
 

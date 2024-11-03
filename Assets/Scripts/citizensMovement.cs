@@ -93,6 +93,15 @@ public class citizensMovement : MonoBehaviour
             agent.speed = 0.3f;
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "brokenBuild")
+        {
+            ImDown = true;
+            citizenAnimation.SetBool("isDown", true);
+            agent.speed = 0.3f;
+        }
+    }
 
     void onAccident()
     {
