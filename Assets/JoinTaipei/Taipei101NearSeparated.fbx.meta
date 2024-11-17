@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 285bdafb7fae0c64b8eefb716ab0717b
+guid: d269e52ec633fa540b5073f3a1039e82
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -14,6 +14,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: BuildingWall001
     second: {fileID: 2100000, guid: 5f20787a5c161e343a2e2b8b8af00880, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crosswalk
+    second: {fileID: 2100000, guid: 464dd80186523454383e9068856af03c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -43,12 +48,27 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Road001
-    second: {fileID: 2100000, guid: c8670f315edb4b44ca5e3483b11c8e02, type: 2}
+    second: {fileID: 2100000, guid: 3495c29d678d0ca46884ed121c4fc2e6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: SideWalk001
-    second: {fileID: 2100000, guid: 684a7105a7918874a901b5e07154a731, type: 2}
+    second: {fileID: 2100000, guid: 20a9bc40552745547b68600af45fc755, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SideWalk002
+    second: {fileID: 2100000, guid: c8e7e07ce3f93e6499d74d39ab880002, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SideWalk003
+    second: {fileID: 2100000, guid: 48156855a912960428487c02707bdd99, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SideWalk004
+    second: {fileID: 2100000, guid: 0cc34459e2dc47a4eb7fa23d443e444f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -112,7 +132,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
