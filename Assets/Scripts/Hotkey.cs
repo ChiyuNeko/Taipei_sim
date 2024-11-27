@@ -45,7 +45,7 @@ public class Hotkey : MonoBehaviour
             GeneratePosition.y + Random.Range(-RandomOffset.y,RandomOffset.y),
             GeneratePosition.z + Random.Range(-RandomOffset.z,RandomOffset.z)), Quaternion.identity);
 
-        Generated.GetComponent<Rigidbody>().AddForce(addForce);
+        //Generated.GetComponent<Rigidbody>().AddForce(addForce);
         Destroy(Generated, 5f); 
     }
 }

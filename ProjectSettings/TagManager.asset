@@ -7,6 +7,7 @@ TagManager:
   - hug-IceBall
   - Citizens
   - brokenBuild
+  - AccidentAlarm
   layers:
   - Default
   - TransparentFX
