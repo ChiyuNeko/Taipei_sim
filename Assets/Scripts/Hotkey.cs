@@ -6,16 +6,18 @@ using UnityEngine;
 public class Hotkey : MonoBehaviour
 {
     public GameObject[] GenerateObjectArray;
-    public Vector3 GenerateArea;
-    public Vector3 GenerateOffset;
+    //public Vector3 GenerateArea;
+    //public Vector3 GenerateOffset;
+    public float HightY;
     public Vector3 Force;
 
 
     public KeyCode Generate;
     public KeyCode MoveCamera;
     public KeyCode MoveCameraBack;
-    
 
+    public Transform RangeA;
+    public Transform RangeB;
 
     void Start()
     {
@@ -24,7 +26,7 @@ public class Hotkey : MonoBehaviour
     {
         if(Input.GetKey(Generate))
         {
-            DynamicGenerate(GenerateObjectArray[0], GenerateArea, GenerateOffset, Force);
+            DynamicGenerate(GenerateObjectArray[0], Force);
         }
 
         if(Input.GetKey(MoveCamera))
@@ -38,12 +40,12 @@ public class Hotkey : MonoBehaviour
         }
     }
     
-    public void DynamicGenerate(GameObject gameObject, Vector3 GeneratePosition, Vector3 RandomOffset, Vector3 addForce)
+    public void DynamicGenerate(GameObject gameObject, Vector3 addForce)
     {
         GameObject Generated = Instantiate(gameObject, new Vector3
-            (GeneratePosition.x + Random.Range(-RandomOffset.x,RandomOffset.x),
-            GeneratePosition.y + Random.Range(-RandomOffset.y,RandomOffset.y),
-            GeneratePosition.z + Random.Range(-RandomOffset.z,RandomOffset.z)), Quaternion.identity);
+            (Random.Range(RangeA.position.x, RangeB.position.x),
+             HightY + Random.Range(-100, 100),
+             Random.Range(RangeA.position.z, RangeB.position.z)), Quaternion.identity);
 
         //Generated.GetComponent<Rigidbody>().AddForce(addForce);
         Destroy(Generated, 5f); 
