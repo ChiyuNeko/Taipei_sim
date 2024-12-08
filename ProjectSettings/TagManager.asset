@@ -8,6 +8,8 @@ TagManager:
   - Citizens
   - brokenBuild
   - AccidentAlarm
+  - OnAccidentPosition
+  - CitizensTargetPosition
   layers:
   - Default
   - TransparentFX

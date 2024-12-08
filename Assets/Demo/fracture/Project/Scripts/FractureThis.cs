@@ -29,7 +29,8 @@ namespace Project.Scripts.Fractures
                 gameObject.layer = LayerMask.NameToLayer("FrozenChunks");
                 StartFractureGameobject();
             }
-            
+            outsideMaterial = GetComponent<MeshRenderer>().materials[0];
+            insideMaterial = GetComponent<MeshRenderer>().materials[0];
         }
 
         void OnCollisionEnter(Collision collision)

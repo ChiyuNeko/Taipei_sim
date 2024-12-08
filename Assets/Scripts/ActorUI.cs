@@ -5,22 +5,21 @@ using UnityEngine.UI;
 
 public class ActorUI : MonoBehaviour
 {
-    //public citizensMovement _cm;
+    public Text pathPending;
 
-    public Text debugText;
-    public Text MyPosistionText;
+    public Text Destination;
     private void Start()
     {
-        debugText.text = "";
+        
     }
 
-    public void DBugLog(string msg)
+    public void DBugLog(bool isPathPending)
     {
-        debugText.text += " >> " + msg;
+        pathPending.text = "isPathPending >> " + isPathPending;
     }
 
     public void ShowDestination(string msg)
     {
-        MyPosistionText.text = msg;
+        Destination.text = msg;
     }
 }
