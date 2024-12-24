@@ -27,6 +27,7 @@ public class Character : CharacterBase
 {
     public float hp;
     public float MoveSpeed;
+    public int DeathTimes;
     public UnityEvent IsLiveEvent;
     public UnityEvent IsHurtEvent;
     public UnityEvent IsPanicEvent;
