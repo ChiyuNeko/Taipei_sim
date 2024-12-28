@@ -2,42 +2,71 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIFadeIOControl : MonoBehaviour
+
+namespace UI_Control
 {
-    public enum Status
-    {
-        Idel,
-        FadeIn,
-        FadeOut
-    }
-    public Status status;
-    private Animator animator;
-    void Start()
-    {
-        status = Status.Idel;
-        animator = gameObject.GetComponent<Animator>();
-    }
 
-
-    public void SetFadeIn()
+    public class UIFadeIOControl : MonoBehaviour
     {
-        if(!(status == Status.FadeIn))
+        public enum Status
         {
-            status = Status.FadeIn;
-            animator.SetBool("Fade In",true);
-            animator.SetBool("Fade Out",false);
-            Debug.Log("Fade in");
-        }   
-    }
-
-    public void SetFadeOut()
-    {
-        if(!(status == Status.FadeOut))
+            Idel,
+            FadeIn,
+            FadeOut
+        }
+        public Status status;
+        private Animator animator;
+        void Start()
         {
-            status = Status.FadeOut;
-            animator.SetBool("Fade In",false);
-            animator.SetBool("Fade Out",true);
-            Debug.Log("Fade Out");
+            status = Status.Idel;
+            animator = gameObject.GetComponent<Animator>();
+        }
+
+
+        public void SetFadeIn()
+        {
+            if(!(status == Status.FadeIn))
+            {
+                status = Status.FadeIn;
+                animator.SetBool("Fade In",true);
+                animator.SetBool("Fade Out",false);
+                Debug.Log("Fade in");
+            }   
+        }
+
+        public void SetFadeOut()
+        {
+            if(!(status == Status.FadeOut))
+            {
+                status = Status.FadeOut;
+                animator.SetBool("Fade In",false);
+                animator.SetBool("Fade Out",true);
+                Debug.Log("Fade Out");
+            }
+        }
+
+        public void FadeInToOut(float sec)
+        {
+            StartCoroutine(fadeInToOut(sec));
+        }
+
+        public void FadeOutToIn(float sec)
+        {
+            StartCoroutine(fadeOutToIn(sec));
+        }
+
+        public IEnumerator fadeInToOut(float sec)
+        {
+            SetFadeIn();
+            yield return new WaitForSeconds(sec);
+            SetFadeOut();
+        }
+
+        public IEnumerator fadeOutToIn(float sec)
+        {
+            SetFadeOut();
+            yield return new WaitForSeconds(sec);
+            SetFadeIn();
         }
     }
 }

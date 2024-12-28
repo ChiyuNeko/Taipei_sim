@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UI_Control;
+using System.Security.Cryptography;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public UIFadeIOControl uIFade;
+    
     void Start()
     {
         
