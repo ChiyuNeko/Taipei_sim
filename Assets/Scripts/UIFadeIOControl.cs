@@ -15,6 +15,7 @@ namespace UI_Control
             FadeOut
         }
         public Status status;
+        public Canvas canvas;
         private Animator animator;
         void Start()
         {
@@ -27,22 +28,24 @@ namespace UI_Control
         {
             if(!(status == Status.FadeIn))
             {
+                canvas.sortingOrder = 100;
                 status = Status.FadeIn;
                 animator.SetBool("Fade In",true);
                 animator.SetBool("Fade Out",false);
                 Debug.Log("Fade in");
-            }   
+            }
         }
 
         public void SetFadeOut()
         {
             if(!(status == Status.FadeOut))
             {
+                canvas.sortingOrder = 100;
                 status = Status.FadeOut;
                 animator.SetBool("Fade In",false);
                 animator.SetBool("Fade Out",true);
                 Debug.Log("Fade Out");
-            }
+            } 
         }
 
         public void FadeInToOut(float sec)
@@ -60,6 +63,8 @@ namespace UI_Control
             SetFadeIn();
             yield return new WaitForSeconds(sec);
             SetFadeOut();
+            yield return new WaitForSeconds(1);
+            canvas.sortingOrder = 0;
         }
 
         public IEnumerator fadeOutToIn(float sec)
@@ -67,6 +72,8 @@ namespace UI_Control
             SetFadeOut();
             yield return new WaitForSeconds(sec);
             SetFadeIn();
+            yield return new WaitForSeconds(1);
+            canvas.sortingOrder = 0;
         }
     }
 }
