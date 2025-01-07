@@ -4,21 +4,28 @@ using UnityEngine;
 
 public class DisasterManager : MonoBehaviour
 {
-    public hugIceBallDropper iceBallDropper;
+    public DisasterDropper iceBallDropper;
+    public DisasterDropper meteoriteDropper;
+    public DisasterDropper RainDropper;
 
-    public Transform dropPosistion;
-
-
-    private void Start()
+    public void DropDisasterByName(Vector3 posistion, string name)
     {
-        
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F))
+        Vector3 DropPosistion = posistion;
+        switch(name)
         {
-            iceBallDropper.OnDisaster_hugIceBall(dropPosistion);
+            case "HugIceBall":
+                iceBallDropper.OnDisaster(DropPosistion);
+                break;
+            case "meteorite":
+                meteoriteDropper.OnDisaster(DropPosistion);
+                break;
+            case "Rain":
+                RainDropper.OnDisaster(DropPosistion);
+                break;
+
+            default:
+                Debug.LogError($"No disaster name \"{name}\"!");
+                break;
         }
     }
 
