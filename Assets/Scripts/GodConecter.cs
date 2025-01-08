@@ -44,7 +44,7 @@ public class GodConecter : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        string NickName = "citizen";
+        string NickName = "citizen_fmf";
         PhotonNetwork.LocalPlayer.NickName = NickName; // Assign random nickname
         Debug.Log("joined room --> FansRoom OK");
         Debug.Log("Name : " + NickName);
@@ -91,6 +91,7 @@ public class GodConecter : MonoBehaviourPunCallbacks
     [PunRPC]
     public void ReciveFromGodDisaster(Vector3 posistion, string disasterType)
     {
+        Debug.Log($"Get {disasterType} !");
         _disasterManager.DropDisasterByName(posistion, disasterType);
     }
 }

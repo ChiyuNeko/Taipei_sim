@@ -32,13 +32,13 @@ public class GameSceneManager : MonoBehaviour
                 TaipeiStationMapObj.SetActive (false);
                 Taipei101MapObject.SetActive (true);
                 disasterManager.SetDropCenter(taipei);
-                npcsManager.SetNpc(taipei,20);
+                npcsManager.SetNpc(taipei,50);
                 break;
             case Taipei.TaipeiStation:
-                TaipeiStationMapObj.SetActive(false);
-                Taipei101MapObject.SetActive(true);
+                TaipeiStationMapObj.SetActive(true);
+                Taipei101MapObject.SetActive(false);
                 disasterManager.SetDropCenter(taipei);
-                npcsManager.SetNpc(taipei, 20);
+                npcsManager.SetNpc(taipei, 50);
                 break;
             default:
                 Debug.LogError($"No map name \"{taipei}\"");
