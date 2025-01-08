@@ -28,7 +28,6 @@ namespace UI_Control
         {
             if(!(status == Status.FadeIn))
             {
-                canvas.sortingOrder = 100;
                 status = Status.FadeIn;
                 animator.SetBool("Fade In",true);
                 animator.SetBool("Fade Out",false);
@@ -40,7 +39,6 @@ namespace UI_Control
         {
             if(!(status == Status.FadeOut))
             {
-                canvas.sortingOrder = 100;
                 status = Status.FadeOut;
                 animator.SetBool("Fade In",false);
                 animator.SetBool("Fade Out",true);

@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     public UIFadeIOControl uIFade;
     public DeathUI deathUI;
     public Character character;
+    public Canvas canvas;
     public GameObject videoPlayerUI;
     public Text RespawnCountDown;
     public Text DeathTitle;
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
     {
         if(videoPlayer.gameObject.activeSelf && videoPlayer.isPaused)
         {
+            canvas.sortingOrder = 100;
             uIFade.FadeOutToIn(5);
             videoPlayerUI.gameObject.SetActive(false);
         }
