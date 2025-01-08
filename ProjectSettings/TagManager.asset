@@ -10,6 +10,9 @@ TagManager:
   - AccidentAlarm
   - OnAccidentPosition
   - CitizensTargetPosition
+  - Bullet
+  - GameSceneManager
+  - Cars
   layers:
   - Default
   - TransparentFX

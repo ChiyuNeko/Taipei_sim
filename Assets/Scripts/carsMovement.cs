@@ -9,6 +9,7 @@ public class carsMovement : MonoBehaviour
     public Transform targetPosition;  // 包含所有目的地的父物件
     public List<Transform> destinations = new List<Transform>();  // 存放隨機抽取的目的地
 
+    public float moveSpeed = 13f;
     public float waitTime = 3.0f;  // 停留時間
 
     private int currentDestinationIndex = 0;  // 目前的目的地索引
@@ -21,7 +22,7 @@ public class carsMovement : MonoBehaviour
     {
 
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = 9f;
+        agent.speed = moveSpeed;
 
         // 隨機從targetPosition底下的子物件中選取5個目的地
         SelectRandomDestinations();
