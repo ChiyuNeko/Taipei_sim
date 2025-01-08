@@ -204,7 +204,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  knockbackForce: 10
+  knockbackForce: 5
   DailyMoveSpeed: 2
   isAccident: 0
   showUI: 0

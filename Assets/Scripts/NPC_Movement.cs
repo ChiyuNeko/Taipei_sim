@@ -126,6 +126,10 @@ public class NPC_Movement : MonoBehaviour
         {
             OnCarCrash(collision);
         }
+        if (collisionTag == "onAccidentPosition")
+        {
+            gameObject.SetActive(false);
+        }
     }
     private void OnTriggerStay(Collider other)
     {
@@ -137,6 +141,18 @@ public class NPC_Movement : MonoBehaviour
         if (triggerTag == "CitizensTargetPosition")
         {
 
+        }
+        if (triggerTag == "onAccidentPosition")
+        {
+            gameObject.SetActive(false);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        string triggerTag = other.gameObject.tag;
+        if (triggerTag == "onAccidentPosition")
+        {
+            gameObject.SetActive(false);
         }
     }
 
@@ -197,7 +213,8 @@ public class NPC_Movement : MonoBehaviour
     {
         boxCllider.isTrigger = true;
         citizenAnimation.SetBool("isDown", true);
-        agent.speed = 0.3f;
+
+        agent.enabled = false;
 
         // ­pºâ¼²À»¤è¦V
         Vector3 crashDirection = (transform.position - collision.transform.position).normalized;

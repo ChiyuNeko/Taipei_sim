@@ -204,7 +204,7 @@ MonoBehaviour:
   action: 0
   aUI: {fileID: 0}
   destinations: []
-  knockbackForce: 10
+  knockbackForce: 5
   DailyMoveSpeed: 2
   isAccident: 0
   showUI: 0

@@ -17,6 +17,8 @@ public class carsMovement : MonoBehaviour
     private bool hasArrived = false;  // 是否已經抵達目的地
     private float destinationRadius = 1.0f;  // 調整抵達判定範圍
 
+
+    public bool DejaBus = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +81,13 @@ public class carsMovement : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "brokenBuild" && !DejaBus)
+        {
+            agent.enabled = false;
+        }
+    }
 
 
 }

@@ -38,7 +38,7 @@ namespace Project.Scripts.Fractures
             if (collision.gameObject.tag == "hug-IceBall")
             {
                 gameObject.layer = LayerMask.NameToLayer("FrozenChunks");
-                Destroy(collision.gameObject);
+                //Destroy(collision.gameObject);
                 StartFractureGameobject();
             }
         }
