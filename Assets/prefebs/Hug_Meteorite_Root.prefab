@@ -19334,7 +19334,7 @@ GameObject:
   - component: {fileID: 8421490788195747865}
   m_Layer: 0
   m_Name: Hug_Meteorite_Root
-  m_TagString: Untagged
+  m_TagString: hug-IceBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

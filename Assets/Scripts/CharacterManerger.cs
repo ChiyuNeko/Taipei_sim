@@ -4,6 +4,8 @@ using UnityEngine;
 using System;
 using Unity.VisualScripting;
 using UnityEngine.Events;
+using UI_Control;
+using ExitGames.Client.Photon.StructWrapping;
 
 
 public abstract class CharacterBase
@@ -32,7 +34,8 @@ public class Character : CharacterBase
     public UnityEvent IsHurtEvent;
     public UnityEvent IsPanicEvent;
     public UnityEvent IsDeadEvent;
-    public UnityEvent InteractEvent;
+    public UnityEvent RespawnEvent;
+    public UnityEvent FinishEvent;
     public override void IsLive()
     {
         IsLiveEvent?.Invoke();
@@ -49,9 +52,9 @@ public class Character : CharacterBase
     {
         IsDeadEvent?.Invoke();
     }
-    public void Interact()
+    public void Respawn()
     {
-        InteractEvent?.Invoke();
+        RespawnEvent?.Invoke();
     }
 }
 
@@ -67,13 +70,64 @@ public class CharacterManerger : MonoBehaviour
 
     }
     public STATUS Status;
-    
-    [SerializeField]
-    private Character Character;
+    public DeathUI deathUI;
+    public Character Character;
+    public Vector3 DeathPos;
 
     public void Update()
     {
+        // if(Input.GetKeyDown(KeyCode.A))
+        // {
+        //     if(Status != STATUS.IsDead)
+        //     {
+        //         Character.IsDeadEvent?.Invoke();
+        //         deathUI.startTime = Time.time;
+        //         Status = STATUS.IsDead;
+        //         Character.DeathTimes++;
+        //         Debug.Log("dead");
+        //         DeathPos = this.transform.position;
+        //     }
+        // }
+        if(deathUI.delta <= 0)
+        {
+            if( Status != STATUS.IsLive)
+            {
+                Character.RespawnEvent?.Invoke();
+                Status = STATUS.IsLive;
+                Debug.Log("live");
+            }
+        }
+        if(Status == STATUS.IsDead)
+        {
+            this.transform.position = DeathPos;
+        }
+    }
 
+    void OnCollisionEnter(Collision other)
+    {
+        string Tag = other.transform.tag;
+        if(Tag == "Cars" || Tag == "brokenBuild" || Tag == "hug-IceBall")
+        {
+            if(Status != STATUS.IsDead)
+            {
+                deathUI.delta = 5;
+                Debug.Log(deathUI.delta);
+                deathUI.startTime = Time.time;
+                Character.IsDeadEvent?.Invoke();
+                Status = STATUS.IsDead;
+                Character.DeathTimes++;
+                DeathPos = this.transform.position;
+            }
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        string Tag = other.transform.tag;
+        if(Tag == "SavePoint")
+        {
+            Character.FinishEvent?.Invoke();
+        }
     }
 
         

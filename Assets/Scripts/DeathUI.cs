@@ -6,9 +6,11 @@ namespace UI_Control
 {
     public class DeathUI: MonoBehaviour
     {
-        public int CountDownText(float startTime, float durationTime)
+        public float startTime;
+        public float delta;
+        public int CountDownText(float durationTime)
         {
-            float delta = durationTime - (Time.time - startTime);
+            delta = durationTime - (Time.time - startTime);
             if((Time.time - startTime) < durationTime)
                 Debug.Log((int)delta);
             

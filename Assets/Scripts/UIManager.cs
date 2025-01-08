@@ -10,13 +10,14 @@ using Unity.VisualScripting;
 
 public class UIManager : MonoBehaviour
 {
+    public CharacterManerger characterManerger;
     public UIFadeIOControl uIFade;
     public DeathUI deathUI;
-    public Character character;
     public Canvas canvas;
     public GameObject videoPlayerUI;
     public Text RespawnCountDown;
     public Text DeathTitle;
+    public Text EndTitle;
     public float WaitingTime {get; set;}
     VideoPlayer videoPlayer;
     
@@ -34,8 +35,9 @@ public class UIManager : MonoBehaviour
             uIFade.FadeOutToIn(5);
             videoPlayerUI.gameObject.SetActive(false);
         }
-        RespawnCountDown.text = "重生等待秒數：" + deathUI.CountDownText(0, 5).ToString();
-        DeathTitle.text = "菜 你死了：" + character.DeathTimes + "次";
+        RespawnCountDown.text = "重生等待秒數：" + deathUI.CountDownText(5).ToString();
+        DeathTitle.text = "菜 你死了：" + characterManerger.Character.DeathTimes + "次";
+        EndTitle.text = "" + characterManerger.Character.DeathTimes;
     }
 
 

@@ -8,14 +8,15 @@ public class GameSceneManager : MonoBehaviour
 
     public DisasterManager disasterManager;
     public NPCsManager npcsManager;
+    public GameObject Player;
 
     public GameObject TaipeiStationMapObj;
     public GameObject Taipei101MapObject;
 
-    private void Start()//¶}µo´ú¸Õ¥Î
+    private void Start()//ï¿½}ï¿½oï¿½ï¿½ï¿½Õ¥ï¿½
     {
         Initialize();
-        SetMap(Taipei.TaipeiStation);
+        //SetMap(Taipei.TaipeiStation);
     }
 
     public void Initialize()
@@ -44,6 +45,19 @@ public class GameSceneManager : MonoBehaviour
                 Debug.LogError($"No map name \"{taipei}\"");
                 break;
         }
+    }
+
+    public void SetTaipei101(GameObject RespawnPoint)
+    {
+        SetMap(Taipei.Taipei101);
+        Player.transform.position = RespawnPoint.transform.position;
+
+    }
+
+    public void SetTaipeiStation(GameObject RespawnPoint)
+    {
+        SetMap(Taipei.TaipeiStation);
+        Player.transform.position = RespawnPoint.transform.position;
     }
 }
 
