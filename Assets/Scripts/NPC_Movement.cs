@@ -27,10 +27,12 @@ public class NPC_Movement : MonoBehaviour
     private NavMeshAgent agent;  // NPC的NavMeshAgent
     public List<Transform> destinations = new List<Transform>();  // 存放隨機抽取的目的地
 
+    public float knockbackForce = 20f;  // 被撞飛的力道
+
     //public float waitTime = 3.0f;  // 停留時間
     public float DailyMoveSpeed = 2f;
 
-    private BoxCollider Bcollider;
+    private BoxCollider boxCllider;
 
     private int currentDestinationIndex = 0;  // 目前的目的地索引
     private float destinationRadius = 0.5f;  // 調整抵達判定範圍
@@ -39,17 +41,20 @@ public class NPC_Movement : MonoBehaviour
 
     public bool isAccident = false;  // 是否發生事故
     public bool showUI = false;
+
+    private void Awake()
+    {
+        if (NPCsManager == null)
+        {
+            NPCsManager = GameObject.FindGameObjectWithTag("GameSceneManager").GetComponent<NPCsManager>();
+        }
+    }
     void Start()
     {
-        if(NPCsManager == null)
-        {
-            NPCsManager = GameObject.Find("SceneManger").GetComponent<NPCsManager>();
-        }
-
-        Bcollider = GetComponent<BoxCollider>();
+        boxCllider = GetComponent<BoxCollider>();
         agent = GetComponent<NavMeshAgent>();
         citizenAnimation = GetComponent<Animator>();
-        aUI = transform.GetChild(0).GetComponent<ActorUI>();
+        //aUI = transform.GetChild(0).GetComponent<ActorUI>();
 
         destinationRadius = 1f;
         //DailyMoveSpeed = DailyMoveSpeed + Random.Range(-0.5f, 0.5f);
@@ -89,11 +94,11 @@ public class NPC_Movement : MonoBehaviour
 
         if(showUI)
         {
-            aUI.gameObject.SetActive(true);
+            //aUI.gameObject.SetActive(true);
         }
         else
         {
-            aUI.gameObject.SetActive(false);
+            //aUI.gameObject.SetActive(false);
         }
         
     }
@@ -106,7 +111,7 @@ public class NPC_Movement : MonoBehaviour
             {
                 DestinationDetect();
             }
-            aUI.DBugLog(agent.pathPending);
+            //aUI.DBugLog(agent.pathPending);
         }
     }
 
@@ -116,6 +121,10 @@ public class NPC_Movement : MonoBehaviour
         if (collisionTag == "hug-IceBall" || collisionTag == "Car" || collisionTag == "brokenBuild")
         {
             OnDown();
+        }
+        if (collisionTag == "Cars")
+        {
+            OnCarCrash(collision);
         }
     }
     private void OnTriggerStay(Collider other)
@@ -140,7 +149,7 @@ public class NPC_Movement : MonoBehaviour
 
     void DestinationDetect()
     {
-        aUI.ShowDestination(agent.remainingDistance.ToString());
+        //aUI.ShowDestination(agent.remainingDistance.ToString());
         if (agent.remainingDistance <= destinationRadius && !agent.pathPending)
         {
             setNextPosistion();
@@ -177,13 +186,36 @@ public class NPC_Movement : MonoBehaviour
         agent.speed = DailyMoveSpeed;
     }
 
-    void OnDown()
+    private void OnDown()
     {
-        Bcollider.isTrigger = true;
+        boxCllider.isTrigger = true;
         citizenAnimation.SetBool("isDown", true);
         agent.speed = 0.3f;
         StartCoroutine(DeathCounter(3));
     }
+    private void OnCarCrash(Collision collision)
+    {
+        boxCllider.isTrigger = true;
+        citizenAnimation.SetBool("isDown", true);
+        agent.speed = 0.3f;
+
+        // 計算撞擊方向
+        Vector3 crashDirection = (transform.position - collision.transform.position).normalized;
+
+        // 增加一個向上的分量
+        Vector3 knockbackDirection = crashDirection + Vector3.up * 0.8f;  // 垂直方向的強度可以調整
+
+        // 施加反方向的力
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody>();  // 如果沒有Rigidbody則添加
+        }
+        rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+
+        StartCoroutine(DeathCounter(3));
+    }
+
 
     IEnumerator DeathCounter(float timer)
     {

@@ -4,31 +4,30 @@ using UnityEngine;
 
 public class NPCSpawner : MonoBehaviour
 {
-    NPCsManager npcsManager;
-    public List<GameObject> npcPrefabs;  // 儲存所有的NPC prefab
+    private NPCsManager npcsManager;
+    public List<GameObject> npcPrefabs = new List<GameObject>();
 
-    public Transform spawnPointParent;   // NPC生成位置的父物件 (spawnPoint_citizens)
-    public List<Transform> spawnPoints;
-    public Transform targetPositionParent;  // 包含所有目的地的父物件
-    public List<Transform> targetPositions;
-    public Transform onAccidentPositionParent;
-    public List <Transform> onAccidentPositions;
+    [SerializeField] List<Transform> nowSpawnPoint;
+    [SerializeField] List<Transform> nowDestinationPosition;
 
     public float spawnDelayTime = 0.2f;  // 生成延遲時間
     public int maxNPCCount;         // 控制生成的NPC數量
 
-    private void Start()
+    private void Awake()
     {
-        npcsManager = GetComponent<NPCsManager>();
-
-        GetAllDestinations();
-        GetAllSpawnPosistion();
-        GetAllOnAccidentPosition();
+        npcsManager = GameObject.FindGameObjectWithTag("GameSceneManager").GetComponent<NPCsManager>();
     }
 
-    public void SpawnNPC(int scal)
+    public void SpawnNPC(int scal, Transform SpawnPoint, Transform DestinationPosition)
     {
         maxNPCCount = scal;
+
+        nowSpawnPoint.Clear();
+        nowDestinationPosition.Clear();
+
+        GetAllDestinations(DestinationPosition);
+        GetAllSpawnPosistion(SpawnPoint);
+
         StartCoroutine(SpawnNPCs());
     }
 
@@ -43,71 +42,40 @@ public class NPCSpawner : MonoBehaviour
         {
             GameObject npcPrefab = npcPrefabs[Random.Range(0, npcPrefabs.Count)];
 
-            Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+            Transform randomSpawnPoint = nowSpawnPoint[Random.Range(0, nowSpawnPoint.Count)];
 
             GameObject newNPC = Instantiate(npcPrefab, randomSpawnPoint.position, randomSpawnPoint.rotation, NPCsParent.transform);
             NPC_Movement nPC_Movement = newNPC.GetComponent<NPC_Movement>();
             nPC_Movement.NPCsManager = npcsManager;
-            nPC_Movement.destinations = targetPositions;
-
+            nPC_Movement.destinations = nowDestinationPosition;
 
             newNPC.SetActive(true);
-            npcsManager.NPCs.Add(newNPC);
+            npcsManager.spawnNpcs.Add(newNPC);
             currentNPCCount++;
             yield return new WaitForSeconds(spawnDelayTime);
         }
 
     }
 
-    void GetAllDestinations()
+    private void GetAllDestinations(Transform ParentObject)
     {
-        // 收集所有目的地
-        foreach (Transform child in targetPositionParent)
+        foreach (Transform child in ParentObject)
         {
-            targetPositions.Add(child);
+            nowDestinationPosition.Add(child);
         }
     }
-    void GetAllSpawnPosistion()
+    private void GetAllSpawnPosistion(Transform ParentObject)
     {
-        foreach (Transform spawnPoint in spawnPointParent)
+        foreach (Transform spawnPoint in ParentObject)
         {
-            spawnPoints.Add(spawnPoint);
-        }
-    }
-    void GetAllOnAccidentPosition()
-    {
-        foreach (Transform onAccidentPosition in onAccidentPositionParent)
-        {
-            onAccidentPositions.Add(onAccidentPosition); // 正確填充清單
+            nowSpawnPoint.Add(spawnPoint);
         }
     }
 
-
-
-    public Transform GetClosestSanctuaryPosition(Transform NPC)
-    {
-        // 檢查清單是否為空
-        if (onAccidentPositions == null || onAccidentPositions.Count == 0)
-        {
-            Debug.LogWarning("No sanctuary positions available.");
-            return null; // 返回空，避免錯誤
-        }
-
-        List<Transform> SanctuaryPosition = new List<Transform>(onAccidentPositions);
-
-        // 按與NPC的距離排序
-        SanctuaryPosition.Sort((a, b) =>
-            Vector3.Distance(NPC.position, a.position).CompareTo(
-                Vector3.Distance(NPC.position, b.position)
-            )
-        );
-
-        return SanctuaryPosition[0];
-    }
-
+    //執行時呼叫
     public Transform GetRandomDestinations()
     {
-        int rendomIndex = Random.Range(0, targetPositions.Count);
-        return targetPositions[rendomIndex];
+        int rendomIndex = Random.Range(0, nowDestinationPosition.Count);
+        return nowDestinationPosition[rendomIndex];
     }
 }

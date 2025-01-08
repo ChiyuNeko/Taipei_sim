@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class DisasterManager : MonoBehaviour
 {
+    public GameSceneManager _gameSceneManager;
+
     public DisasterDropper iceBallDropper;
     public DisasterDropper meteoriteDropper;
     public DisasterDropper RainDropper;
 
+    public Transform dropCenterTaipeiStation;
+    public Transform dropCenterTaipei101;
+
+    private Transform dropCenter;
+
     public void DropDisasterByName(Vector3 posistion, string name)
     {
-        Vector3 DropPosistion = posistion;
+        Vector3 DropPosistion = dropCenter.position;
         switch(name)
         {
             case "HugIceBall":
@@ -29,4 +36,19 @@ public class DisasterManager : MonoBehaviour
         }
     }
 
+    public void SetDropCenter(Taipei taipeiLandMark)
+    {
+        switch(taipeiLandMark)
+        {
+            case Taipei.Taipei101:
+                dropCenter = dropCenterTaipei101;
+                break;
+            case Taipei.TaipeiStation:
+                dropCenter = dropCenterTaipeiStation;
+                break;
+            default:
+                Debug.LogError($"No map name \"{taipeiLandMark}\"");
+                break;
+        }
+    }
 }
