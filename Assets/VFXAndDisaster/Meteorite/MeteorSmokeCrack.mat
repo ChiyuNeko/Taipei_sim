@@ -69,7 +69,7 @@ Material:
     - _BumpScale: 1
     - _CameraFadingEnabled: 1
     - _CameraFarFadeDistance: 0
-    - _CameraNearFadeDistance: 52.6
+    - _CameraNearFadeDistance: 400
     - _ColorMode: 0
     - _Cull: 2
     - _Cutoff: 0.5
@@ -98,7 +98,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _CameraFadeParams: {r: 52.6, g: -0.019011408, b: 0, a: 0}
+    - _CameraFadeParams: {r: 400, g: -0.0025, b: 0, a: 0}
     - _Color: {r: 0.8805031, g: 0.8805031, b: 0.8805031, a: 1}
     - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

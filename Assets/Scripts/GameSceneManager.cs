@@ -16,7 +16,7 @@ public class GameSceneManager : MonoBehaviour
     private void Start()//�}�o���ե�
     {
         Initialize();
-        //SetMap(Taipei.TaipeiStation);
+        //SetMap(Taipei.Taipei101);
     }
 
     public void Initialize()

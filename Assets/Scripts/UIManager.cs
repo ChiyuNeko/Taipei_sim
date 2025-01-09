@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public DeathUI deathUI;
     public Canvas canvas;
     public GameObject videoPlayerUI;
+    public GameObject MapUI;
     public Text RespawnCountDown;
     public Text DeathTitle;
     public Text EndTitle;
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
             canvas.sortingOrder = 100;
             uIFade.FadeOutToIn(5);
             videoPlayerUI.gameObject.SetActive(false);
+            MapUI.SetActive(true);
         }
         RespawnCountDown.text = "重生等待秒數：" + deathUI.CountDownText(5).ToString();
         DeathTitle.text = "菜 你死了：" + characterManerger.Character.DeathTimes + "次";
